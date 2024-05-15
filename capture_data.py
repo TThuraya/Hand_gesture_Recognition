@@ -49,4 +49,4 @@ cv2.destroyAllWindows()
 # Save the landmarks and labels to a CSV file
 data = pd.DataFrame(landmarks_list)
 data['label'] = gesture_labels
-data.to_csv('gesture_data4.csv', index=False)
+data.to_csv('gesture_data_org.csv', index=False)
