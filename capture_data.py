@@ -1,9 +1,15 @@
+
+# This fioe utlizes Mediapipe hands to capture a dataset of our desiered hand gestures 
+#it launches The Mediapipe Hands, detects the hands from the camera and iputs the corresponding label to the gesture
+# the collected database 'gesture_data_org' was captured with 591 records and 6 classes (gestures)
+# the six gestures we chose were 'thumbs_up', 'point_up', 'point_down', 'open_palm', 'heart', 'perfect'
+
 import cv2
 import mediapipe as mp
 import numpy as np
 import pandas as pd
 
-# Initialize MediaPipe Hands
+# Initializing MediaPipe Hands
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
@@ -12,8 +18,10 @@ mp_drawing = mp.solutions.drawing_utils
 # Start capturing video
 cap = cv2.VideoCapture(0)
 
-gesture_labels = []  # Store labels for each gesture
-landmarks_list = []  # Store landmarks
+# Store labels for each gesture, we can add new gestures anytime, this can be expanded in the future to read sign language 
+gesture_labels = []  
+# Storing landmarks, landmarks are the cordonates of each joint in the hand skelaton offered by Mediapipe
+landmarks_list = []
 
 def extract_landmarks(landmarks):
     return [landmark.x for landmark in landmarks.landmark] + [landmark.y for landmark in landmarks.landmark]
@@ -24,9 +32,11 @@ while cap.isOpened():
     # Mirror the image
     frame = cv2.flip(frame, 1)
 
-    # Convert to RGB (MediaPipe operates in RGB)
+    # Convert to RGB (MediaPipe only operates in RGB)
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    results = hands.process(rgb_frame)  # Detect hand landmarks
+    # Detect hand landmarks
+    results = hands.process(rgb_frame)  
+
 
     if results.multi_hand_landmarks:  # If hands are detected
         for landmarks in results.multi_hand_landmarks:
@@ -49,4 +59,4 @@ cv2.destroyAllWindows()
 # Save the landmarks and labels to a CSV file
 data = pd.DataFrame(landmarks_list)
 data['label'] = gesture_labels
-data.to_csv('gesture_data_org2.csv', index=False)
+data.to_csv('gesture_data_org.csv', index=False)
