@@ -1,9 +1,13 @@
+# this file launches Mediapipe Hands, and performs real-time gesture recognistion
+# the predictions of all three models are displayed
+
+#importing
 import cv2
 import mediapipe as mp
 import joblib
 import numpy as np
 
-# Load the trained classifiers
+# Load the classifiers 
 svm_clf = joblib.load('svm_gesture_classifier.pkl')
 rf_clf = joblib.load('rf_gesture_classifier.pkl')
 mlp_clf = joblib.load('mlp_gesture_classifier.pkl')
