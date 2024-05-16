@@ -17,31 +17,8 @@ mp_drawing = mp.solutions.drawing_utils
 # Start capturing video
 cap = cv2.VideoCapture(0)
 
-# Load emoji images
-emoji_images = {
-    'thumbs-up': cv2.imread('thumbs_up_emoji.png', cv2.IMREAD_UNCHANGED),
-    'heart': cv2.imread('heart_emoji.png', cv2.IMREAD_UNCHANGED),
-    'open_palm': cv2.imread('open_palm_emoji.png', cv2.IMREAD_UNCHANGED),
-    'perfect': cv2.imread('perfect_emoji.png', cv2.IMREAD_UNCHANGED),
-    'point_up': cv2.imread('point_up_emoji.png', cv2.IMREAD_UNCHANGED),
-    'point_down': cv2.imread('point_down_emoji.png', cv2.IMREAD_UNCHANGED),
-    'fist': cv2.imread('fist_emoji.png', cv2.IMREAD_UNCHANGED)
-}
-
 def extract_landmarks(landmarks):
     return [landmark.x for landmark in landmarks.landmark] + [landmark.y for landmark in landmarks.landmark]
-
-def overlay_image_alpha(img, img_overlay, x, y, alpha_mask):
-    """Overlay img_overlay on top of img at the position specified by
-    x and y with an alpha mask."""
-    img_overlay = cv2.resize(img_overlay, (50, 50))
-    b, g, r, a = cv2.split(img_overlay)
-    overlay_color = cv2.merge((b, g, r))
-    mask = cv2.merge((a, a, a))
-
-    img_roi = img[y:y+50, x:x+50]
-    img_roi = cv2.add(img_roi, overlay_color, mask=mask)
-    img[y:y+50, x:x+50] = img_roi
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -69,13 +46,10 @@ while cap.isOpened():
                 'MLP': mlp_clf.predict(landmark_array)[0]
             }
             
-            # Display predictions and emojis
+            # Display predictions
             y_pos = 30
             for model, gesture in gestures.items():
                 cv2.putText(frame, f"{model}: {gesture}", (10, y_pos), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
-                emoji_img = emoji_images.get(gesture)
-                if emoji_img is not None:
-                    overlay_image_alpha(frame, emoji_img, 200, y_pos - 25, emoji_img[:, :, 3])  # Adjust position as needed
                 y_pos += 30
 
     # Display the title centered and in black
