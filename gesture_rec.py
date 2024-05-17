@@ -1,11 +1,11 @@
 # this file launches Mediapipe Hands, and performs real-time gesture recognistion
 # the predictions of all three models are displayed
-
-#importing
 import cv2
 import mediapipe as mp
 import joblib
 import numpy as np
+import signal
+import sys
 
 # Load the classifiers 
 svm_clf = joblib.load('svm_gesture_classifier.pkl')
@@ -23,6 +23,14 @@ cap = cv2.VideoCapture(0)
 
 def extract_landmarks(landmarks):
     return [landmark.x for landmark in landmarks.landmark] + [landmark.y for landmark in landmarks.landmark]
+
+def signal_handler(sig, frame):
+    print("Interrupt received, stopping...")
+    cap.release()
+    cv2.destroyAllWindows()
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, signal_handler)
 
 while cap.isOpened():
     ret, frame = cap.read()

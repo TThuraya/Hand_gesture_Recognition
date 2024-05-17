@@ -1,5 +1,7 @@
 import cv2
 import mediapipe as mp
+import signal
+import sys
 
 # Initialize mediapipe holistic model and drawing utils
 holistic_model = mp.solutions.holistic
@@ -35,6 +37,15 @@ def draw_custom_landmarks(image, results):
         drawing_utils.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=4),
         drawing_utils.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
     )
+
+# Signal handler for graceful exit
+def signal_handler(sig, frame):
+    print("Interrupt received, stopping...")
+    video_capture.release()
+    cv2.destroyAllWindows()
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, signal_handler)
 
 # Open the webcam
 video_capture = cv2.VideoCapture(0)
