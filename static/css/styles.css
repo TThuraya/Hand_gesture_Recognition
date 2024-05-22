@@ -1,12 +1,19 @@
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #b81515;
+	color: #373737;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -27,11 +34,58 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: #385041;
     color: white;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #7d9185;
 }
+
+.black-screen {
+    width: 800px;
+    height: 600px;
+    background-color: black;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+footer {
+    background-color: #385041;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+
+header[role="banner"] {
+	#logo-main {
+	  display: block;
+	  margin: 20px auto;
+	}
+  }
+  
+  #navbar-primary.navbar-default {
+	background: transparent;
+	border: none;
+	.navbar-nav { 
+	  width: 100%;
+	  text-align: center;
+	  > li {
+		display: inline-block;
+		float: none;
+		> a {
+		  padding-left: 30px;
+		  padding-right: 30px;
+		  }
+	  }
+	}
+  }
+
+  #navbar-primary.navbar-default .navbar-nav > li > a {
+	color: #385041;
+	font-size: 18px;
+	font-weight: 700;
+  }

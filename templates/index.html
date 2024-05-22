@@ -1,39 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gesture Recognition and Face Mesh</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <h1>Gesture Recognition and Face Mesh</h1>
-    <div>
-        <img id="video" src="{{ url_for('video_feed') }}" width="800">
-    </div>
-    <div>
-        <button onclick="setMode('gesture')">Gesture Recognition</button>
-        <button onclick="setMode('face_mesh')">Face Mesh</button>
-        <button onclick="stopFeed()">Stop Feed</button>
-    </div>
+{% extends "base.html" %}
 
-    <script>
-        function setMode(mode) {
-            fetch(`/set_mode/${mode}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.status);
-                });
-        }
+{% block title %}Gesture Recognition and Face Mesh{% endblock %}
 
-        function stopFeed() {
-            fetch('/stop_feed')
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.status);
-                    document.getElementById('video').src = '';
-                });
-        }
-    </script>
-</body>
-</html>
+{% block content %}
+<h1>Gesture Recognition and Face Mesh</h1>
+<div id="video-container">
+    <img id="video" src="{{ url_for('video_feed') }}" width="800">
+</div>
+<div>
+    <button onclick="setMode('gesture')">Gesture Recognition</button>
+    <button onclick="setMode('face_mesh')">Face Mesh</button>
+    <button onclick="stopFeed()">Stop/Reset Feed</button>
+</div>
+
+<script>
+    function setMode(mode) {
+        fetch(`/set_mode/${mode}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.status);
+                restartFeed();
+            });
+    }
+
+    function stopFeed() {
+        fetch('/stop_feed')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.status);
+                document.getElementById('video').src = '';
+                document.getElementById('video-container').innerHTML = '<div class="black-screen"></div>';
+            });
+    }
+
+    function restartFeed() {
+        document.getElementById('video-container').innerHTML = '<img id="video" src="{{ url_for("video_feed") }}" width="800">';
+    }
+</script>
+{% endblock %}

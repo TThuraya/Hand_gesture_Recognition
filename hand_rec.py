@@ -7,9 +7,9 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the classifiers for gesture recognition
-svm_clf = joblib.load(r'C:\Users\Admin\Hand_gesture_Recognition\training\svm_gesture_classifier.pkl')
-rf_clf = joblib.load(r'C:\Users\Admin\Hand_gesture_Recognition\training\rf_gesture_classifier.pkl')
-mlp_clf = joblib.load(r'C:\Users\Admin\Hand_gesture_Recognition\training\mlp_gesture_classifier.pkl')
+svm_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl')
+rf_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/rf_gesture_classifier.pkl')
+mlp_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl')
 
 # Initialize MediaPipe Hands and Holistic models
 mp_hands = mp.solutions.hands
@@ -95,12 +95,19 @@ def index():
 def video_feed():
     global streaming
     streaming = True
+    cap.open(0)  # Ensure the capture is open
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/stop_feed')
 def stop_feed():
     global streaming
     streaming = False
+    cap.release()
+    cv2.destroyAllWindows()
     return jsonify(status="Stream stopped")
 
 @app.route('/set_mode/<new_mode>')
@@ -110,4 +117,4 @@ def set_mode(new_mode):
     return jsonify(status=f"Mode set to {mode}")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
