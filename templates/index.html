@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Recognition and Face Mesh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Gesture Recognition and Face Mesh</h1>
+    <div>
+        <img id="video" src="{{ url_for('video_feed') }}" width="800">
+    </div>
+    <div>
+        <button onclick="setMode('gesture')">Gesture Recognition</button>
+        <button onclick="setMode('face_mesh')">Face Mesh</button>
+        <button onclick="stopFeed()">Stop Feed</button>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            fetch(`/set_mode/${mode}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.status);
+                });
+        }
+
+        function stopFeed() {
+            fetch('/stop_feed')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.status);
+                    document.getElementById('video').src = '';
+                });
+        }
+    </script>
+</body>
+</html>
