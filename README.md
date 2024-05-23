@@ -1,8 +1,7 @@
 # GR Recognition System 
+  
+  <img style="text-align: center;" src="static/images/logo1.png" alt="Global Logo">
 
-<div style="text-align: center;">
-  <img src="static/images/logo1.png" alt="Global Logo">
-</div>
 
   <p>Welcome to the Gesture Recognition Web Application repository. This project leverages cutting-edge computer vision and machine learning technologies to recognize hand gestures in real-time. Our tool is designed to be intuitive and interactive, providing users with a seamless experience as they explore gesture-based interfaces.</p>
 
