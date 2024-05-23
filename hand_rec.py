@@ -7,9 +7,9 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the classifiers for gesture recognition
-svm_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/svm_gesture_classifier.pkl')
-rf_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/rf_gesture_classifier.pkl')
-mlp_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl')
+svm_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/svm_gesture_classifier.pkl') # Change the path to the location of the trained models
+rf_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/rf_gesture_classifier.pkl') # Change the path to the location of the trained models
+mlp_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl') # Change the path to the location of the trained models
 
 # Initialize MediaPipe Hands and Holistic models
 mp_hands = mp.solutions.hands
