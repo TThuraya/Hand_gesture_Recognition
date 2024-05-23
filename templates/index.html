@@ -1,40 +1,152 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GR</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="HTML5 website template">
+  <meta name="keywords" content="GR, template, html, sass, jquery">
+  <meta name="author" content="Bucky Maler">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
 
-{% block title %}Gesture Recognition and Face Mesh{% endblock %}
-
-{% block content %}
-<h1>Gesture Recognition and Face Mesh</h1>
-<div id="video-container">
-    <img id="video" src="{{ url_for('video_feed') }}" width="800">
+<!-- notification for small viewports and landscape oriented smartphones -->
+<div class="device-notification">
+  <a class="device-notification--logo" href="#0">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="GR">
+    <p>GR</p>
+  </a>
+  <p class="device-notification--message">GR has so much to offer that we must request you orient your device to portrait or find a larger screen. You won't be disappointed.</p>
 </div>
-<div>
-    <button onclick="setMode('gesture')">Gesture Recognition</button>
-    <button onclick="setMode('face_mesh')">Face Mesh</button>
-    <button onclick="stopFeed()">Stop/Reset Feed</button>
+
+<div class="perspective effect-rotate-left">
+  <div class="container"><div class="outer-nav--return"></div>
+    <div id="viewport" class="l-viewport">
+      <div class="l-wrapper">
+        <header class="header">
+          <a class="header--logo" href="#0">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="GR">
+            <p>GR</p>
+          </a>
+          <button class="header--cta cta">Contact Us</button>
+        </header>
+        <nav class="l-side-nav">
+          <ul class="side-nav">
+            <li class="is-active"><span>Home</span></li>
+            <li><span>Gesture Recognition</span></li>
+            <li><span>About</span></li>
+          </ul>
+        </nav>
+        <ul class="l-main-content main-content">
+          <li class="l-section section section--is-active">
+            <div class="intro">
+              <div class="intro--banner">
+                <h1>Your next<br>interactive<br>experience</h1>
+                <button class="cta">Contact Us
+                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                  <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                    <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
+                  </g>
+                  </svg>
+                  <span class="btn-background"></span>
+                </button>
+                <img src="{{ url_for('static', filename='images/introduction-visual.png') }}" alt="Welcome">
+              </div>
+              <div class="intro--options">
+                <a href="#0">
+                  <h3>Cutting-Edge Computer Vision</h3>
+                  <p>Our gesture recognition leverages the latest advancements in computer vision, deep learning, and sensor fusion. This powerful combination delivers unparalleled accuracy and flexibility.</p>
+                </a>
+                <a href="#0">
+                  <h3>Real-Time Performance</h3>
+                  <p>Experience lightning-fast response times and robust detection, even in complex environments. Our algorithms deliver industry-leading accuracy and reliability.</p>
+                </a>
+                <a href="#0">
+                  <h3>Powering the Future of Interaction</h3>
+                  <p>As the world becomes more connected, gesture-based interfaces will be essential for intuitive, hands-free control of smart devices, machines, and digital spaces. Be at the forefront of this transformation.</p>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="l-section section">
+            <div class="work">
+              <h2>Try out our gesture recognition tool</h2>
+              <div class="work--lockup">
+                <img id="video" src="" width="1000">
+              </div>
+              <div>
+                <button style="background-color: blue; color: white;" onclick="setMode('gesture')">Gesture Recognition</button>
+                <button style="background-color: blue; color: white;" onclick="setMode('face_mesh')">Face Mesh</button>
+                <button style="background-color: blue; color: white;" onclick="stopFeed()">Stop/Reset Feed</button>
+            </div>
+            </div>
+          </li>
+          <li class="l-section section">
+            <div class="about">
+              <div class="about--banner">
+                <h2>We<br>believe in<br>automating<br>techology</h2>
+                <a href="https://github.com/TThuraya/Hand_gesture_Recognition">Source Code
+                  <span>
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                    <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                      <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
+                    </g>
+                    </svg>
+                  </span>
+                </a>
+                <img src="{{ url_for('static', filename='images/about-visual.png') }}"alt="About Us">
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-    function setMode(mode) {
-        fetch(`/set_mode/${mode}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.status);
-                restartFeed();
-            });
-    }
+  function setMode(mode) {
+      fetch(`/set_mode/${mode}`)
+          .then(response => response.json())
+          .then(data => {
+              console.log(data.status);
+              restartFeed();
+          });
+  }
 
-    function stopFeed() {
-        fetch('/stop_feed')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.status);
-                document.getElementById('video').src = '';
-                document.getElementById('video-container').innerHTML = '<div class="black-screen"></div>';
-            });
-    }
+  function stopFeed() {
+      fetch('/stop_feed')
+          .then(response => response.json())
+          .then(data => {
+              console.log(data.status);
+              document.getElementById('video').src = '';
+          });
+  }
 
-    function restartFeed() {
-        document.getElementById('video-container').innerHTML = '<img id="video" src="{{ url_for("video_feed") }}" width="800">';
-    }
+  function restartFeed() {
+      document.getElementById('video').src = '/video_feed';
+  }
+
+  document.addEventListener('scroll', function() {
+      const gestureDiv = document.querySelector('.work');
+      const videoFeed = document.getElementById('video');
+      const rect = gestureDiv.getBoundingClientRect();
+      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+      if (isVisible && videoFeed.src === '') {
+          // Start video feed
+          videoFeed.src = '/video_feed';
+      } else if (!isVisible && videoFeed.src !== '') {
+          // Stop video feed
+          stopFeed();
+      }
+  });
 </script>
-{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for("static", filename="js/vendor/jquery-2.2.4.min.js") }}"><\/script>')</script>
+<script src="{{ url_for('static', filename='js/functions-min.js') }}"></script>
+</body>
+</html>

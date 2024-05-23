@@ -7,7 +7,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the classifiers for gesture recognition
-svm_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl')
+svm_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/svm_gesture_classifier.pkl')
 rf_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/rf_gesture_classifier.pkl')
 mlp_clf = joblib.load('/Users/shahadaleissa/Hand_gesture_Recognition/training/mlp_gesture_classifier.pkl')
 
@@ -21,7 +21,7 @@ mp_drawing = mp.solutions.drawing_utils
 
 # Video capture object
 cap = cv2.VideoCapture(0)
-streaming = True  # Flag to control streaming
+streaming = False  # Flag to control streaming
 mode = 'gesture'  # Default mode
 
 def extract_landmarks(landmarks):
@@ -97,10 +97,6 @@ def video_feed():
     streaming = True
     cap.open(0)  # Ensure the capture is open
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 @app.route('/stop_feed')
 def stop_feed():
