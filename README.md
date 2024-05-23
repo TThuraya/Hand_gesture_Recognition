@@ -26,7 +26,7 @@
 
   <h2 id="real-time-video-demonstration">Real-Time Video Demonstration</h2>
 
-  <img src="static/images/gesture-recognition-tool.png" alt="Gesture Recognition Video">
+  <img src="static/images/rec_vid.mov" alt="Gesture Recognition Video">
 
   <p>Our gesture recognition tool processes video input in real-time, detecting and recognizing hand gestures with high accuracy. The tool can be accessed via the "Gesture Recognition" section of the web interface. Once you scroll to this section, the video feed will start automatically, showcasing the tool's capabilities.</p>
 
